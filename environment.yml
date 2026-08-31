@@ -1,0 +1,21 @@
+name: structural
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - pip
+  - rdkit
+  - openbabel
+  - numpy
+  - pandas
+  - matplotlib
+  - pymol-open-source
+  - pip:
+    - joblib==1.5.3
+    - scikit-learn==1.9.0
+    - scipy==1.18.0
+    - catboost==1.2.10
+    - optuna==4.9.0
+    - tqdm==4.70.0
+    - seaborn==0.13.2

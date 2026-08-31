@@ -1,0 +1,17 @@
+.vscode/
+catboost_info/
+
+docking/docking_results/*
+docking/ligands/*
+
+!docking/ligands/mol_1.pdbqt
+!docking/ligands/mol_2.pdbqt
+!docking/ligands/mol_3.pdbqt
+!docking/ligands/mol_4.pdbqt
+!docking/ligands/mol_5.pdbqt
+
+!docking/docking_results/docking_mol_1.pdbqt
+!docking/docking_results/docking_mol_2.pdbqt
+!docking/docking_results/docking_mol_3.pdbqt
+!docking/docking_results/docking_mol_4.pdbqt
+!docking/docking_results/docking_mol_5.pdbqt

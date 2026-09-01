@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdFingerprintGenerator, Fragments
+import matplotlib.pyplot as plt
 
 MODEL_DIR = "models"
 
@@ -78,10 +79,35 @@ test_molecules = {
     "Caffeine": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C"
 }
 
-print("=== РЕЗУЛЬТАТЫ СЛЕПОГО ТЕСТА ===")
+plot_drugs = []
+plot_energies = []
+print("=== РЕЗУЛЬТАТЫ ТЕСТА ===")
 for name, smiles in test_molecules.items():
     res = run_prediction(smiles)
     if isinstance(res, str):
         print(f"{name:30} -> {res}")
     else:
         print(f"{name:30} -> Предсказанная энергия: {res:.2f} kcal/mol")
+        plot_drugs.append(name)
+        plot_energies.append(res)
+
+if plot_energies:  
+    print("\nГенерация графика...")
+    plt.figure(figsize=(9, 6))
+    
+    bars = plt.bar(plot_drugs, plot_energies, color=['teal', 'gray', 'lightgray'])
+
+    plt.bar_label(bars, fmt='%.2f', padding=-15, color='white', fontweight='bold')
+    plt.ylabel('Predicted Affinity (kcal/mol)')
+    plt.title('Blind Test: Specific Inhibitor vs Non-specific Compounds')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.xticks(rotation=15, ha='right')
+
+    os.makedirs('visualization', exist_ok= True)
+    plt.savefig('visualization/blind_test_results.png', dpi = 300, bbox_inches = 'tight')
+    print("График сохранен в 'visualization/blind_test_results.png'")
+
+    plt.show()
+
+else:
+    print("\nНе удалось построить график: нет успешных предсказаний.")
